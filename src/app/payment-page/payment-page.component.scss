@@ -1,0 +1,12 @@
+.mb-50 {
+  margin-bottom: 50px;
+}
+
+form .img_logo_payment {
+  margin-bottom: 7px;
+
+  &.submitted {
+    opacity: 0.3;
+  }
+}
+

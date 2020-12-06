@@ -1,0 +1,144 @@
+<div class="main-panel">
+  <div class="content-wrapper">
+    <form [formGroup]="form" >
+
+      <div class="row">
+
+        <div class="col-md-6 grid-margin stretch-card">
+          Choisissez les modes de paiement acceptés
+        </div>
+
+        <div class="col-sm-6 grid-margin stretch-card">
+
+          <div class="container">
+
+            <div class="row">
+              <mat-slide-toggle
+                class="tp-margin mb-50"
+                formControlName="online_payment"
+                (change)="changed_toggle()"
+                [disabled]="submitted">
+                Online payments
+              </mat-slide-toggle>
+
+              <div *ngIf="checked_toggle">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <img [ngClass]="{'submitted': submitted}" class="img_logo_payment"
+                         src="../../assets/images/PayPal.svg" width="100" height="30"
+                         alt="PayPal">
+                    <mat-slide-toggle
+                      class="tp-margin"
+                      formControlName="paypal"
+                      [checked]="paypal"
+                      (change)="paypal_toggle()"
+                      [disabled]="submitted">
+                      PayPal payments
+                    </mat-slide-toggle>
+                  </div>
+
+                  <div class="col-md-6">
+                    <img [ngClass]="{'submitted': submitted}" class="img_logo_payment"
+                         src="../../assets/images/Stripe.svg" width="100" height="35"
+                         alt="Stripe">
+                    <mat-slide-toggle
+                      formControlName="stripe"
+                      class="tp-margin"
+                      [checked]="stripe"
+                      (change)="stripe_toggle()"
+                      [disabled]="submitted">
+                      Stripe payments
+                    </mat-slide-toggle>
+                  </div>
+
+                </div>
+
+
+                <!--  Paypal credential-->
+                <div *ngIf="paypal && checked_toggle">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <input formControlName="paypal_client_id" type="text" class="form-control"
+                             placeholder="Paypal client id">
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <input formControlName="paypal_secret" type="text" class="form-control"
+                             placeholder="Paypal secret key">
+                    </div>
+                  </div>
+                </div>
+
+
+                <!--  Stripe credential-->
+                <div *ngIf="stripe && checked_toggle">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <input formControlName="stripe_publish_key" type="text" class="form-control"
+                             placeholder="Publishable key">
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <input formControlName="stripe_secret" type="text" class="form-control" placeholder="Secret key">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+
+
+              <ng-template #content>
+                <div class="container">
+                  <div class="col-md-6">
+                    <div class="form-check form-check-flat form-check-primary">
+                      <label class="form-check-label">
+                        <input
+                          formControlName="card"
+                          [disabled]="submitted == true"
+                          type="checkbox" class="form-check-input"
+                          (change)="onCheckedBankCard($event)">
+                        Carte Bancaire(CB)
+                        <i class="input-helper"></i>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-check form-check-flat form-check-primary">
+                      <label class="form-check-label">
+                        <input
+                          formControlName="cash"
+                          [disabled]="submitted == true"
+                          type="checkbox" class="form-check-input"
+                          (change)="onCheckedCash($event)">
+                        Liquide
+                        <i class="input-helper"></i>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <ng-template #submit_btn>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block"
+                          [disabled]="!form.valid || submitted == true">
+                    Save
+                  </button>
+                </ng-template>
+
+              </ng-template>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
