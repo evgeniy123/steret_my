@@ -12,30 +12,19 @@ export class PaymentPageComponent implements OnInit {
   public paypal: boolean = false;
   public stripe: boolean = false;
 
-
   public color = 'accent';
 
-  public disabled_toggle: boolean = false;
   public checked_toggle: boolean = false;
 
-  public checkedBankCard: boolean = false;
-  public checkedCash: boolean = false;
-
-  public first_load: boolean = true;
-
-  formErrors: any;
   errorMessage: string = '';
 
   public form: FormGroup;
   public submitted: boolean = false;
-  public out_for_server: Array<number>;
 
   constructor(
     public fb: FormBuilder,
   ) {
     this.form = fb.group({
-      card: new FormControl({value: '', disabled: false}, Validators.required),
-      cash: new FormControl({value: '', disabled: false}, Validators.required),
 
       online_payment: new FormControl(),
 
@@ -53,8 +42,6 @@ export class PaymentPageComponent implements OnInit {
   ngOnInit(): void {
 
     let result = {
-      cash: false,
-      card: false,
       paypal: {
         paypal_client: "test_data",
         secret_key: "test_data",
@@ -62,20 +49,16 @@ export class PaymentPageComponent implements OnInit {
     };
 
 
-    this.form.controls.card.setValue(!!result.card);
-    this.form.controls.cash.setValue(!!result.cash);
-
     if (result.paypal) {
 
       this.checked_toggle = true;
       this.form.controls.online_payment.setValue(this.checked_toggle);
 
-      if (result.paypal) {
-        this.paypal = true;
-        this.stripe = false;
-        this.form.controls.paypal.setValue(true);
-        this.form.controls.stripe.setValue(false);
-      }
+      this.paypal = true;
+      this.stripe = false;
+      this.form.controls.paypal.setValue(this.paypal);
+      this.form.controls.stripe.setValue(this.stripe);
+
     }
 
     this.form.controls.paypal_client_id.setValue(result.paypal.paypal_client);
@@ -85,23 +68,27 @@ export class PaymentPageComponent implements OnInit {
 
   public changed_toggle() {
     this.checked_toggle = !this.checked_toggle;
+
     console.log(this.checked_toggle);
   }
 
   public paypal_toggle() {
-    this.paypal = !this.paypal;
-    this.form.controls.paypal.setValue(this.paypal);
-    if (this.stripe) {
-      this.stripe = !this.stripe;
+    ///this.paypal = !this.paypal;
+    if (this.form.controls.stripe) {
+      this.form.controls.stripe.setValue(false);
+      //this.stripe = !this.stripe;
     }
+    // this.form.controls.paypal.setValue(this.paypal);
   }
 
   public stripe_toggle() {
-    this.stripe = !this.stripe;
-    this.form.controls.stripe.setValue(this.stripe);
-    if (this.paypal) {
-      this.paypal = !this.paypal;
+    //this.stripe = !this.stripe;
+    if (this.form.controls.paypal) {
+      this.form.controls.paypal.setValue(false);
+      /// this.paypal = !this.paypal;
     }
+    console.log("gtgtgtg", this.paypal);
+    // this.form.controls.stripe.setValue(this.stripe);
   }
 
   onCheckedBankCard($event: Event) {

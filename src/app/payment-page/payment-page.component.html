@@ -17,7 +17,7 @@
                 class="tp-margin mb-50"
                 formControlName="online_payment"
                 (change)="changed_toggle()"
-                [disabled]="submitted">
+               >
                 Online payments
               </mat-slide-toggle>
 
@@ -31,9 +31,7 @@
                     <mat-slide-toggle
                       class="tp-margin"
                       formControlName="paypal"
-                      [checked]="paypal"
-                      (change)="paypal_toggle()"
-                      [disabled]="submitted">
+                      (change)="paypal_toggle()">
                       PayPal payments
                     </mat-slide-toggle>
                   </div>
@@ -45,9 +43,7 @@
                     <mat-slide-toggle
                       formControlName="stripe"
                       class="tp-margin"
-                      [checked]="stripe"
-                      (change)="stripe_toggle()"
-                      [disabled]="submitted">
+                      (change)="stripe_toggle()">
                       Stripe payments
                     </mat-slide-toggle>
                   </div>
@@ -90,44 +86,11 @@
 
 
               <ng-template #content>
-                <div class="container">
-                  <div class="col-md-6">
-                    <div class="form-check form-check-flat form-check-primary">
-                      <label class="form-check-label">
-                        <input
-                          formControlName="card"
-                          [disabled]="submitted == true"
-                          type="checkbox" class="form-check-input"
-                          (change)="onCheckedBankCard($event)">
-                        Carte Bancaire(CB)
-                        <i class="input-helper"></i>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-check form-check-flat form-check-primary">
-                      <label class="form-check-label">
-                        <input
-                          formControlName="cash"
-                          [disabled]="submitted == true"
-                          type="checkbox" class="form-check-input"
-                          (change)="onCheckedCash($event)">
-                        Liquide
-                        <i class="input-helper"></i>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
 
 
 
                 <ng-template #submit_btn>
-                  <button type="submit" class="btn btn-primary btn-lg btn-block"
-                          [disabled]="!form.valid || submitted == true">
-                    Save
-                  </button>
+
                 </ng-template>
 
               </ng-template>
