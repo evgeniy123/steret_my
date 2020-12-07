@@ -9,8 +9,7 @@ import {Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "
 
 export class PaymentPageComponent implements OnInit {
 
-  public paypal: boolean = false;
-  public stripe: boolean = false;
+
 
   public color = 'accent';
 
@@ -54,10 +53,8 @@ export class PaymentPageComponent implements OnInit {
       this.checked_toggle = true;
       this.form.controls.online_payment.setValue(this.checked_toggle);
 
-      this.paypal = true;
-      this.stripe = false;
-      this.form.controls.paypal.setValue(this.paypal);
-      this.form.controls.stripe.setValue(this.stripe);
+      this.form.controls.paypal.setValue(true);
+      this.form.controls.stripe.setValue(false);
 
     }
 
@@ -87,7 +84,6 @@ export class PaymentPageComponent implements OnInit {
       this.form.controls.paypal.setValue(false);
       /// this.paypal = !this.paypal;
     }
-    console.log("gtgtgtg", this.paypal);
     // this.form.controls.stripe.setValue(this.stripe);
   }
 
