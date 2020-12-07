@@ -1,6 +1,6 @@
 <div class="main-panel">
   <div class="content-wrapper">
-    <form [formGroup]="form" (ngSubmit)="submit()">
+    <form [formGroup]="form" >
 
       <div class="row">
 
@@ -17,7 +17,7 @@
                 class="tp-margin mb-50"
                 formControlName="online_payment"
                 (change)="changed_toggle()"
-               >
+              >
                 Online payments
               </mat-slide-toggle>
 
@@ -26,11 +26,12 @@
 
                   <div class="col-md-6">
                     <img [ngClass]="{'submitted': submitted}" class="img_logo_payment"
-                         src="../../../assets/images/PayPal.svg" width="100" height="30"
+                         src="../../assets/images/PayPal.svg" width="100" height="30"
                          alt="PayPal">
                     <mat-slide-toggle
                       class="tp-margin"
                       formControlName="paypal"
+                      [checked]="paypal"
                       (change)="paypal_toggle()">
                       PayPal payments
                     </mat-slide-toggle>
@@ -38,11 +39,12 @@
 
                   <div class="col-md-6">
                     <img [ngClass]="{'submitted': submitted}" class="img_logo_payment"
-                         src="../../../assets/images/Stripe.svg" width="100" height="35"
+                         src="../../assets/images/Stripe.svg" width="100" height="35"
                          alt="Stripe">
                     <mat-slide-toggle
                       formControlName="stripe"
                       class="tp-margin"
+                      [checked]="stripe"
                       (change)="stripe_toggle()">
                       Stripe payments
                     </mat-slide-toggle>
@@ -83,17 +85,11 @@
 
             <div class="row">
 
-              <div *ngIf="first_load; else content">
-                <app-spinner></app-spinner>
-              </div>
+
 
               <ng-template #content>
 
-                <div *ngIf="submitted && !first_load; else submit_btn">
-                  <div style="text-align: center">
-                    <app-spinner></app-spinner>
-                  </div>
-                </div>
+
 
                 <ng-template #submit_btn>
 

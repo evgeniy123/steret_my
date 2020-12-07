@@ -44,7 +44,7 @@ export class PaymentPageComponent implements OnInit {
     let result = {
       paypal: {
         paypal_client: "test_data",
-        secret_key: "test_data",
+        secret_key: "test_data11",
       }
     };
 
